@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:spring/applicationContext*.xml
+		</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:config/log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.localizationContext
+		</param-name>
+		<param-value>application</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>yasi.root</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+		</filter-class>
+		<init-param>
+			<param-name>singleSessionparam</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>
+			com.alphasta.common.core.webapp.filter.LoginFilter
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.shtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>/j_security_check</url-pattern>
+	</filter-mapping>
+	<!-- Spring Character Encoding filter-->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/j_security_check</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<filter-class>
+			org.acegisecurity.util.FilterToBeanProxy
+		</filter-class>
+		<init-param>
+			<param-name>targetClass</param-name>
+			<param-value>
+				org.acegisecurity.util.FilterChainProxy
+			</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<url-pattern>/j_security_check</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Acegi Filter Chain Proxy</filter-name>
+		<url-pattern>/j_acegi_logout</url-pattern>
+	</filter-mapping>
+
+	<!-- ecside is great Table tablib,and it create by chinese -->
+	<filter>
+		<filter-name>ecsideExport</filter-name>
+		<filter-class>org.ecside.filter.ECSideFilter</filter-class>
+		<init-param>
+			<param-name>useEasyDataAccess</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>useEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ecsideExport</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>ActionContextCleanUp</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.ActionContextCleanUp
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ActionContextCleanUp</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>struts</filter-name>
+		<filter-class>
+			com.alphasta.common.core.webapp.filter.CmsFilterDispatcher
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts</filter-name>
+		<url-pattern>/struts/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>
+			org.springframework.web.util.Log4jConfigListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			org.acegisecurity.ui.session.HttpSessionEventPublisher
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>
+			org.directwebremoting.servlet.DwrServlet
+		</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>jcaptcha</servlet-name>
+		<servlet-class>
+			com.alphasta.common.security.jcaptcha.ImageCaptchaServlet
+		</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>Connector</servlet-name>
+		<servlet-class>
+			com.fredck.FCKeditor.connector.ConnectorServlet
+		</servlet-class>
+		<init-param>
+			<param-name>baseDir</param-name>
+			<param-value>/uploadFiles/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>SimpleUploader</servlet-name>
+		<servlet-class>
+			com.fredck.FCKeditor.uploader.SimpleUploaderServlet
+		</servlet-class>
+		<init-param>
+			<param-name>baseDir</param-name>
+			<param-value>/uploadFiles/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>enabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsFile</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsFile</param-name>
+			<param-value>
+				php|php3|php5|phtml|asp|aspx|ascx|jsp|cfm|cfc|pl|bat|exe|dll|reg|cgi
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsImage</param-name>
+			<param-value>jpg|gif|jpeg|png|bmp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsImage</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsFlash</param-name>
+			<param-value>swf|fla|flv</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsFlash</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Connector</servlet-name>
+		<url-pattern>
+			/js/fckeditor/editor/filemanager/browser/default/connectors/jsp/connector
+		</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SimpleUploader</servlet-name>
+		<url-pattern>
+			/js/fckeditor/editor/filemanager/upload/simpleuploader
+		</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>jcaptcha</servlet-name>
+		<url-pattern>/captcha.jpg</url-pattern>
+	</servlet-mapping>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://www.ecside.org</taglib-uri>
+			<taglib-location>/WEB-INF/tld/ecside.tld</taglib-location>
+		</taglib>
+
+		<taglib>
+			<taglib-uri>/alphasta/common</taglib-uri>
+			<taglib-location>/WEB-INF/tld/common.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/alphasta/cms</taglib-uri>
+			<taglib-location>/WEB-INF/tld/alphasta.tld</taglib-location>
+		</taglib>
+
+	</jsp-config>
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/common/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/404.jsp</location>
+	</error-page>
+	
+	<session-config>
+		<session-timeout>600</session-timeout>
+	</session-config>
+
+</web-app>
+

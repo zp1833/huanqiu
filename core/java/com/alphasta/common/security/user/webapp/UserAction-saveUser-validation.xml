@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//OpenSymphony Group//XWork Validator 1.0//EN" 
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+  <field name="loginId">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[登录名不能为空]]></message>
+    </field-validator>
+  </field>
+  <field name="model.password">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[请输入密码]]></message>
+    </field-validator>
+    <field-validator type="stringlength">
+      <param name="minLength">3</param>
+      <message><![CDATA[最少输入${minLength}位密码]]></message>
+    </field-validator>
+  </field>
+  <field name="confirmPwd">
+		<field-validator type="fieldexpression">
+			<param name="expression">(confirmPwd == password)</param>
+			<message key="user.password.equal"><![CDATA[ 两次输入密码不一致 ]]></message>
+		</field-validator>
+  </field>
+	
+  <field name="model.email">
+    <field-validator type="email">
+      <message><![CDATA[请填写正确的邮箱地址]]></message>
+    </field-validator>
+  </field>
+
+</validators>
+

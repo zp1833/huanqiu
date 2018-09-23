@@ -1,0 +1,37 @@
+<html>
+<head>
+
+	<title>Resize Widget Test</title>
+
+	<script type="text/javascript">var djConfig = {isDebug: false, parseOnLoad: true };</script>
+	<script type="text/javascript" src="../../dojo/dojo.js"></script>
+	<script type="text/javascript" src="../Paginator.js"></script>
+
+	<script language="JavaScript" type="text/javascript">
+		dojo.require("dojo.parser"); 
+		// dojo.require("dojox.sam.Paginator");
+	</script>
+	
+	<LINK href="../resources/Paginator.css" type='text/css' rel='stylesheet'>
+
+</head>
+<body>
+	<script>
+		dojo.addOnLoad(function() {
+			var p = dijit.byId('testPaginator');
+			p. pagingFunction = function(args) {alert('');};
+			p.setParams({
+		                 pageNo    : 4,
+		                 totalCount: 200,
+		                 pageSize  : 30 });  
+		});
+	</script>
+	<div dojoType="jsam.Paginator" id="testPaginator" showMessage="true" 
+	     style="width:426px; padding:1px;margin:2px; background-color:white;
+	     border-color:#6593CF"
+	     messageTemplate = "共{0}行, 分为{1}页, 这是第{3}页." 
+		 showFastStep="true" maxFastStep="5" 
+		 messageWidth="260">
+  </div>
+</body>
+</html>

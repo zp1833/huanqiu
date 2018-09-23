@@ -1,0 +1,78 @@
+html,body {
+	font: normal 12px ����,sans-serif;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	overflow: hidden;
+	height: 100%;
+}
+
+p {
+	margin: 5px;
+}
+
+span{
+	font: 12px ����,sans-serif;
+}
+
+#ext-gen15{
+	font: bold 12px ����,sans-serif;
+}
+
+.icon {
+	margin-right: 5px;
+	border: none;
+}
+
+.template {
+	background-image: url(../images/exticons/plugin.gif);
+}
+
+.catalog {
+	background-image: url(../images/exticons/album.gif);
+}
+
+.article {
+	background-image: url(../images/exticons/new_tab.gif);
+}
+.video {
+	background-image: url(../images/exticons/new_tab.gif);
+}
+
+.ann {
+	background-image: url(../images/exticons/msg.gif);
+}
+.print{
+	background-image: url(../images/exticons/print.gif);
+}
+.link {
+	background-image: url(../images/exticons/event.gif);
+}
+.vote {
+	background-image: url(../images/exticons/member.gif);
+}
+.problems {
+	background-image: url(../images/exticons/collapse-all.gif);
+}
+.meet {
+	background-image: url(../images/icons/users.gif);
+}
+.comAdv {
+	background-image: url(../images/exticons/config.gif);
+}
+.publicService {
+	background-image: url(../images/exticons/edit.gif);
+}
+.sys {
+	background-image: url(../images/exticons/gears.gif);
+}
+.jmail {
+	background-image: url(../images/icons/mail_3.gif);
+}
+.personSettings {
+	background-image: url(../images/icons/authority.gif);
+}
+.house{
+	background-image: url(../images/icons/house_2.gif);
+}
+

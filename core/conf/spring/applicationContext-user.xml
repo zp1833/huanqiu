@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-lazy-init="true" default-autowire="byName">
+   <bean id="acegiCacheSyncListener" class="com.alphasta.common.security.user.service.listener.AcegiCacheSyncListener">
+       <property name="acegiCacheManager" ref="acegiCacheManager"></property>
+   </bean>
+   <bean id="userDao" class="com.alphasta.common.security.user.dao.UserDAO">
+       <property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+   
+   <bean id="userManager" class="com.alphasta.common.security.user.service.UserManager">
+       <property name="dao" ref="userDao"></property>
+       <property name="passwordEncoder" ref="passwordEncoder"></property>
+       <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+       <property name="userChangeListeners">
+          <list>
+             <value>com.alphasta.common.security.user.service.listener.UserChangeCascadeListener</value>
+             <ref bean="acegiCacheSyncListener"/>
+          </list>
+       </property>
+       
+   </bean>
+   
+   <bean  scope="prototype" id="userAction" class="com.alphasta.common.security.user.webapp.UserAction">
+       <property name="manager" ref="userManager"></property>
+   </bean>
+   
+   <bean scope="prototype" id="userRoleRemoteAction"
+      class="com.alphasta.common.security.user.webapp.UserRoleRemoteAction">
+      <property name="userManager" ref="userManager"></property>
+      <property name="roleManager" ref="roleManager"></property>
+   </bean>
+  
+   <bean id="roleManager" class="com.alphasta.common.security.user.service.RoleManager">
+      <property name="dao" ref="dao"></property>
+      <property name="acegiCacheManager" ref="acegiCacheManager"></property>
+   </bean>
+   
+   <bean  scope="prototype" id="roleAction" class="com.alphasta.common.security.user.webapp.RoleAction">
+       <property name="manager" ref="roleManager"></property>
+   </bean>
+   
+   <bean scope="prototype" id="rolePermissionRemoteAction"
+      class="com.alphasta.common.security.user.webapp.RolePermissionRemoteAction">
+      <property name="roleManager" ref="roleManager"></property>
+      <property name="permissionManager" ref="permissionManager"></property>
+   </bean>
+   <bean id="permissionManager" class="com.alphasta.common.security.user.service.PermissionManager">
+      <property name="dao" ref="dao"></property>
+      <property name="acegiCacheManager" ref="acegiCacheManager"></property>
+   </bean>
+   
+   <bean scope="prototype" id="permissionResourceAction"
+      class="com.alphasta.common.security.user.webapp.PermissionResourceRemoteAction">
+      <property name="permissionManager" ref="permissionManager"></property>
+      <property name="resourceManager" ref="resourceManager"></property>
+   </bean>
+   
+   <bean  scope="prototype" id="permissionAction" class="com.alphasta.common.security.user.webapp.PermissionAction">
+       <property name="manager" ref="permissionManager"></property>
+   </bean>
+   
+   <bean id="resourceManager" class="com.alphasta.common.security.user.service.ResourceManager">
+       <property name="dao" ref="dao"></property>
+       <property name="acegiCacheManager" ref="acegiCacheManager"></property>
+   </bean>
+   <bean  scope="prototype" id="resourceAction" class="com.alphasta.common.security.user.webapp.ResourceAction">
+       <property name="manager" ref="resourceManager"></property>
+       <property name="strutsXmlFiles">
+           <list>
+               <value>struts-security.xml</value>
+               <value>struts-dept.xml</value>   
+               <value>struts-catalog.xml</value>   
+               <value>struts-links.xml</value>   
+               <value>struts-article.xml</value>   
+               <value>struts-employee.xml</value>   
+               <value>struts-advisory.xml</value>   
+               <value>struts-template.xml</value>   
+               <value>struts-announce.xml</value>   
+               <value>struts-clazz.xml</value>   
+               <value>struts-laws.xml</value>
+			   <value>struts-license.xml</value>
+			   <value>struts-vote.xml</value>
+           </list>
+       </property>
+   </bean>
+   
+   <bean id="userCache" class="com.alphasta.common.security.acegi.cache.OsCacheBasedUserCache">
+      <property name="cache"><ref local="userCacheBackend"/></property>
+   </bean>
+   <bean id="userCacheBackend" class="com.alphasta.common.core.cache.OsCacheFactoryBean">
+      <property name="regionName">
+        <value>com.alphasta.common.security.UserCacheRegion</value>
+      </property>
+    </bean>
+  
+   <bean id="resourceCache" class="com.alphasta.common.security.acegi.cache.OsCacheBasedResourceCache">
+      <property name="cache"><ref local="resourceCacheBackend"/></property>
+   </bean>
+   
+   <bean id="resourceCacheBackend" class="com.alphasta.common.core.cache.OsCacheFactoryBean">
+      <property name="regionName">
+        <value>com.alphasta.common.security.ResourceCacheRegion</value>
+      </property>
+    </bean>
+  
+   <bean id="acegiCacheManager" class="com.alphasta.common.security.acegi.cache.AcegiCacheManagerImpl">
+      <property name="userDao" ref="userDao"></property>
+      <property name="resCache" ref="resourceCache"></property>
+      <property name="userCache" ref="userCache"></property>
+   </bean>
+   
+   <bean id="hibernateUserDetailService" class="com.alphasta.common.security.acegi.UserDetailService">
+       <property name="userManager" ref="userManager"></property>
+   </bean>
+</beans>

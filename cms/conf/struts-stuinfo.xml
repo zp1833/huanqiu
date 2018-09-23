@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!--学生信息管理-->
+	<package name="stuinfo" extends="struts-default"
+		namespace="/admin/stuinfo">
+		<!-- 添加学生信息 -->
+		<action name="newStuInfo" class="stuInfoAction">
+			<result>/pages/admin/stuinfo/editStuInfo.jsp</result>
+		</action>
+
+		<action name="editStuInfo" class="stuInfoAction"
+			method="edit">
+			<result>/pages/admin/stuinfo/editStuInfo.jsp</result>
+		</action>
+
+		<action name="saveStuInfo" class="stuInfoAction"
+			method="saveStuInfo">
+			<result type="redirect">
+				<![CDATA[
+					listStuInfo.do?modifyFlag=${modifyFlag}&model.id=${model.id}&definedField=${definedField}&definedSearch=${definedSearch}&currentPageNo=${currentPageNo}&beginAdvDate=${beginAdvDate}&endAdvDate=${endAdvDate}&beginSignDate=${beginSignDate}&endSignDate=${endSignDate}&beginVisitDate=${beginVisitDate}&endVisitDate=${endVisitDate}&showType=${showType}
+				]]>
+			</result>
+		</action>
+
+		<action name="listStuInfo" class="stuInfoAction"
+			method="pageQuery">
+			<result>/pages/admin/stuinfo/listStuInfo.jsp</result>
+		</action>
+
+		<action name="listVisitStuInfo" class="stuInfoAction"
+			method="listReturnVisitDetails">
+			<result>/pages/admin/stuinfo/listVisitStuInfo.jsp</result>
+		</action>
+
+		<action name="lookStuInfo" class="stuInfoAction"
+			method="edit">
+			<result>/pages/admin/stuinfo/lookStuInfo.jsp</result>
+		</action>
+	</package>
+</struts>
+
+

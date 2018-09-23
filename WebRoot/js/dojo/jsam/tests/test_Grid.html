@@ -1,0 +1,69 @@
+<!--
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Programmatic FilteringTable Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	
+	
+	<script type="text/javascript" src="../../dojo/dojo.js" djConfig="isDebug:true, parseOnLoad: true" ></script>
+	<script type="text/javascript">
+		dojo.require("jsam.Grid");
+		dojo.require("dojo.parser");
+	</script>
+	<style type="text/css">
+
+		@import "../resources/Grid.css"; 
+
+		body { font-family : sans-serif; }
+		
+	</style>
+	<script type="text/javascript">
+		var testColumns = [
+			{ field: "ColumnA"},
+			{ field: "ColumnB", dataType:"number" },
+			{ field: "ColumnC" }
+		];
+		var testData = [
+			{ id:0, "ColumnA": "abc", "ColumnB": "123", "ColumnC": "!@#" },
+			{ id:1, "ColumnA": "def", "ColumnB": "456", "ColumnC": "asdfasd" },
+			{ id:2, "ColumnA": "hij", "ColumnB": "789", "ColumnC": "asdfasdf" },
+			{ id:3, "ColumnA": "klm", "ColumnB": "098", "ColumnC": "asdfasdf"},
+			{ id:4, "ColumnA": "opq", "ColumnB": "765", "ColumnC": "qowie" },
+			{ id:5, "ColumnA": "rst", "ColumnB": "432", "ColumnC": "xcvms" },
+			{ id:6, "ColumnA": "uvw", "ColumnB": "101", "ColumnC": "lwqkejr" },
+			{ id:7, "ColumnA": "xyz", "ColumnB": "234", "ColumnC": "zpxocivu" }
+		];
+
+		dojo.addOnLoad(function() {
+			var filteringTable = dijit.byId("content");
+
+			//for (var x = 0; x<testColumns.length; x++) {
+			//	filteringTable.columns.push(filteringTable.createMetaData(testColumns[x]));
+			//}
+
+			filteringTable.store.setData(testData);
+		});
+	</script>
+</head>
+<body>
+	<table dojoType="jsam.Grid" alternateRows="true" cellpadding="0" cellspacing="0"
+	 useCustomerSort="false" maxSelect="1" id="content" 
+	 style="width: 430px; height: 200px;">
+	 <thead>
+	    <tr>
+		   <td field="id">ID</td>
+		   <td field="ColumnA">名称</td>
+		   <td field="ColumnB">型号</td>
+		   <td field="ColumnC">组别</td>
+		</tr>
+	 </thead>
+	 
+	 </table>
+	 <br>
+	<input type='button' value="selectedId" onclick="alert(dijit.byId('content').getSelectedData().id)">
+</body>
+</html>

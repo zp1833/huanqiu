@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>dojox.layout.FloatPane - simplest extension on TitlePane ... ever.</title>
+		
+	<script type="text/javascript" src="../../dojo/dojo.js" djConfig="isDebug:true, parseOnLoad: true" ></script>
+
+	<script type="text/javascript">
+		dojo.require("jsam.Dialog"); 		
+		dojo.require("dojo.parser");
+	</script>
+	<style type="text/css">
+		@import "../resources/Dialog.css"; 
+	</style>
+</head>
+<body>
+	<input type="button" onclick="dijit.byId('dialog1').show()" value="Show Dialog">
+
+<div dojoType="jsam.Dialog" style="width:250px; height:250px;"  resizable="true"
+	id="dialog1" title="First Dialog" closeText="">
+		
+	JAX AJAX Ext Dojo 你是否觉得人们似乎习惯了人云亦云而忽视了这样一个事实即只有用户才有最终的发言权。如论如何请把文本看完，
+		我相信作者的独到观点很值得大家思考。原文：http://jroller.com/page/sjivan Ext vs. Dojo 尊重是挣来的而非买来的。
+
+</div>
+</body>
+</html>

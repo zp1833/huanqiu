@@ -1,0 +1,113 @@
+<!--
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Programmatic FilteringTable Test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+	
+	
+	<script type="text/javascript" src="../../dojo/dojo.js" djConfig="isDebug:true, parseOnLoad: true" ></script>
+	<script type="text/javascript">
+		dojo.require("jsam.Grid");
+		dojo.require("jsam.Paginator");
+		dojo.require("dojo.parser");
+	</script>
+	<style type="text/css">
+
+		@import "../resources/Grid.css"; 
+		@import "../resources/Paginator.css"; 
+
+		body { font-family : sans-serif; }
+		
+	</style>
+	<script type="text/javascript">
+		var testColumns = [
+			{ field: "ColumnA"},
+			{ field: "ColumnB", dataType:"string" },
+			{ field: "ColumnC" }
+		];
+		var testData = [
+			{ id:0, "ColumnA": "abc", "ColumnB": "123", "ColumnC": "!@#" },
+			{ id:1, "ColumnA": "def", "ColumnB": "456", "ColumnC": "asdfasd" },
+			{ id:2, "ColumnA": "hij", "ColumnB": "789", "ColumnC": "asdfasdf" },
+			{ id:3, "ColumnA": "klm", "ColumnB": "098", "ColumnC": "asdfasdf"},
+			{ id:4, "ColumnA": "opq", "ColumnB": "765", "ColumnC": "qowie" },
+			{ id:5, "ColumnA": "rst", "ColumnB": "432", "ColumnC": "xcvms" },
+			{ id:6, "ColumnA": "uvw", "ColumnB": "101", "ColumnC": "lwqkejr" },
+			{ id:7, "ColumnA": "xyz", "ColumnB": "234", "ColumnC": "zpxocivu" },
+			{ id:8, "ColumnA": "abc", "ColumnB": "cc", "ColumnC": "一二三" },
+			{ id:9, "ColumnA": "cs", "ColumnB": "xx", "ColumnC": "asdfasd" },
+			{ id:10, "ColumnA": "adf", "ColumnB": "cc", "ColumnC": "asdfasdf" },
+			{ id:11, "ColumnA": "cc", "ColumnB": "xx", "ColumnC": "asdfasdf"},
+			{ id:12, "ColumnA": "xx", "ColumnB": "cc", "ColumnC": "qowie" },
+			{ id:13, "ColumnA": "bb", "ColumnB": "cc", "ColumnC": "xcvms" },
+			{ id:14, "ColumnA": "xx", "ColumnB": "bbb", "ColumnC": "lwqkejr" },
+			{ id:15, "ColumnA": "cc", "ColumnB": "23cc4", "ColumnC": "zpxocivu" }
+		];
+
+		dojo.addOnLoad(function() {
+			//为分页器设置分页函数
+			var paginator = dijit.byId('testPaginator');
+		    if(paginator) {
+		        paginator.pagingFunction = function(args) {
+		           return query(args.pageNo, 3);
+		        };
+		    }
+			query(1, 3); //执行查询
+		});
+		
+		function query(no, size) {
+			var result = []; 
+			var start = (no - 1) * size; 
+			if(start <= testData.length) {
+				for(var i = start; i < testData.length && i < start + size; i++) {
+					result.push(testData[i]);
+				}
+				//更新表格
+				var table = dijit.byId("content");
+			    table.store.setData(result);
+			}
+			//更新分页器
+			var paginator = dijit.byId('testPaginator');
+			if(paginator) {
+			    paginator.setParams({
+			             pageNo    : no,
+			             totalCount: testData.length,
+			             pageSize  : size });  
+			}
+			return  paginator.params;  
+			
+		}
+	</script>
+</head>
+<body>
+	<table dojoType="jsam.Grid" alternateRows="true" cellpadding="0" cellspacing="0"
+	 useCustomerSort="false" maxSelect="1" id="content" 
+	 style="width: 500px;">
+	 <thead>
+	    <tr>
+		   <td field="id" width="30">ID</td>
+		   <td field="ColumnA">名称</td>
+		   <td field="ColumnB">型号</td>
+		   <td field="ColumnC">组别</td>
+		</tr>
+	 </thead>
+	 <tfoot>
+	     <tr>
+		     <td class="samGridFooter" colspan="20">
+				 <div dojoType="jsam.Paginator" id="testPaginator" showMessage="true" 
+				     messageTemplate = "共{0}行, 分为{1}页, 这是第{3}页." 
+					 showFastStep="true" maxFastStep="5" style="width:100%"
+					 messageWidth="260">
+			      </div>
+			 </td>
+		 </tr>
+	 </tfoot>
+	 </table>
+	 <br>
+	<input type='button' value="selectedId" onclick="alert(dijit.byId('content').getSelectedData().id)">
+</body>
+</html>

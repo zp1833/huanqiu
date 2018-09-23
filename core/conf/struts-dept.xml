@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 部门管理 -->
+	<package name="admin.dept" extends="struts-default" namespace="/admin/dept">
+		 <action name="list" class="deptAction" method="query">
+		     <result name="success" type="dispatcher">/pages/admin/dept/listDepts.jsp</result>
+		 </action>
+		 <action name="create" class="deptAction">
+		     <result>/pages/admin/dept/editDept.jsp</result>
+		 </action>
+		 <action name="edit" class="deptAction" method="edit">
+		     <result>/pages/admin/dept/editDept.jsp</result>
+		 </action>
+		 <action name="remove" class="deptAction" method="remove">
+		     <result name="success" type="redirect">list.do</result>
+		 </action>
+		 <action name="save" class="deptAction" method="save">
+		     <result name="success" type="redirect">list.do</result>
+		     <result name="input">/pages/admin/dept/editDept.jsp</result>
+		 </action>
+		 <action name="updateDeptSerialNo" class="deptAction" method="updateSerialNo">
+		     <result name="success" type="redirect">list.do</result>
+		 </action>
+		 <!-- 排序列表 -->
+		<action name="orderDepts" class="deptAction">
+	      <result>/pages/admin/dept/orderDept.jsp</result>
+	    </action>
+	    <!-- 保存排序结果 -->
+	    <action name="saveOrderDept" class="deptAction" method="saveOrderDept">
+	      <result name="success" type="redirect">orderDepts.do</result>
+	    </action>
+	</package>
+</struts>
+

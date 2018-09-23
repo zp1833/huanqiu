@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-lazy-init="true" default-autowire="byName">
+   <bean id="deptManager" class="com.alphasta.common.dept.service.DeptManager">
+       <property name="dao" ref="dao" />
+       <property name="serialNoManager" ref="deptSerialNoManager" />
+   </bean>
+   
+   <bean scope="prototype" id="deptAction" class="com.alphasta.common.dept.webapp.DeptAction">
+       <property name="manager" ref="deptManager" />
+       <property name="serialNoManager" ref="deptSerialNoManager" />
+   </bean>
+   
+   <bean id="deptSerialNoManager" class="com.alphasta.common.dept.service.DeptSerialNoManager">
+       <property name="dao" ref="dao" />
+   </bean>
+</beans>

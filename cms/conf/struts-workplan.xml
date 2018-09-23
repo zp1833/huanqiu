@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!--工作计划管理-->
+	<package name="workplan" extends="struts-default" namespace="/admin/workplan">
+		<!-- 工作计划信息 -->
+		<action name="newWorkPlan" class="workPlanAction">
+			<result>/pages/admin/workplan/editWorkPlan.jsp</result>
+		</action>
+
+		<action name="editWorkPlan" class="workPlanAction" method="edit">
+			<result>/pages/admin/workplan/editWorkPlan.jsp</result>
+		</action>
+		
+		<action name="saveWorkPlan" class="workPlanAction" method="saveWorkPlan">
+			<result type="redirect">listWorkPlan.do</result>
+		</action>
+		
+		<action name="listWorkPlan" class="workPlanAction" method="pageQuery">
+			<result>/pages/admin/workplan/listWorkPlan.jsp</result>
+		</action>
+		
+	</package>
+</struts>
+
+

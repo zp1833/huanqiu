@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//OpenSymphony Group//XWork Validator 1.0//EN" 
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+  <field name="model.name">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[资源名称不能为空]]></message>
+    </field-validator>
+  </field>	
+  <field name="model.resString">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[资源字符串不能为空]]></message>
+    </field-validator>
+  </field>
+  <field name="model.descn">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[资源描述不能为空]]></message>
+    </field-validator>
+  </field>
+</validators>

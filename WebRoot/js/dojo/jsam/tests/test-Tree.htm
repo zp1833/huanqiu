@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/javascript" src="../../dojo/dojo.js" djConfig="isDebug:true, parseOnLoad: true" ></script>
+
+	<script type="text/javascript">
+		dojo.require("jsam.Tree");
+		dojo.require("dojo.parser");
+		dojo.addOnLoad(
+		  function() {
+		  	var tree = dijit.byId("tree1");
+			tree.render({text: 'root', childNodes:[
+			    {id:"abc", text:'a', onclick : function(value){alert(value.id);}},
+				{text:'b',ondblclick:function(x){alert(x.text);}, childNodes:[
+				    {text:'c', onclick : function(value){alert(value.text);}},
+					{text:'狙击手', ondblclick:function(x){alert(x.text);}},
+					{text:'tom.com', href:'http://www.tom.com'}
+				]}
+			]});
+		  }
+		);
+		
+		function showSelect() {
+			var tree = dijit.byId("tree1");
+			if (tree.getTreeBase().getSelected()) { 
+			   alert(tree.getTreeBase().getSelected().id); 
+			}
+		}
+		
+		function getChecked() {
+		   var tree = dijit.byId("tree2");
+		   var x = (tree.getCheckedValues());
+		   if(x.length>0) alert(x[0].text);
+		}
+	</script>
+	<LINK href="../resources/tree.css" type='text/css' rel='stylesheet'>
+	<LINK href="../resources/treeList.css" type='text/css' rel='stylesheet'>
+<title>Tree</title>
+</head>
+<body>
+
+<div id="tree1" dojoType="jsam.Tree"
+  style="width: 200px;">
+</div> 
+<br>
+<input type="button" value="alert(tree.getSelected().id);" onclick="showSelect()" style="width: 245px;">
+<br><br><br>
+<div id="tree2" text="ROOT" dojoType="jsam.Tree" multiple="true">
+    <div text="cccc"></div>
+	<div text="cccc"></div>
+	<div text="cccc"></div>
+	<div text="cccc">
+	    <div text="bbb"></div>
+		<div text="bbb"></div>
+	</div>
+</div>
+<input id="textNode">
+<div dojoType="jsam.TreeInput" textNodeId="textNode" id="treeList" text="KOO" class="samTreeList"
+     style="border:1px #98c0f4 solid; width: 200px"><div text="cccc"></div>
+	<div text="xxx"></div>
+	<div text="xxx"></div>
+	<div text="xxx">
+	    <div text="yyy"></div>
+		<div text="yyy"></div>
+	</div></div>
+<input type="button" onclick="getChecked()">
+</body>
+</html>

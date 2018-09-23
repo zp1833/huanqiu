@@ -1,0 +1,16 @@
+.samTreeList {
+	background-color: white;
+	position: absolute;
+	z-index: 2000;
+	cursor: default;
+	border:1px #cecece solid;
+	text-align:left;
+	overflow : auto;
+}
+
+.samTreeBtn {
+	border:1px #cecece solid;
+	height: 20px;
+	background-color: #D2E0F1;
+	background:url(images/button.gif) repeat-x;
+}

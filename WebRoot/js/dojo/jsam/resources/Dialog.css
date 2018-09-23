@@ -1,0 +1,93 @@
+.dijitDialogCloseIcon {
+	background: url('images/close.gif') no-repeat right top;
+	float: right;
+	position: absolute;
+	vertical-align: middle;
+	right: 3px;
+	top: 3px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+.dijitDialog,.dijitDialog.dijitDialogPaneContent {
+	position: absolute;
+	overflow: visible;
+	z-index: 999;
+	border: 1px solid;
+	border-color: #6593CF;
+	background-color: #f2f9ff; /*#BBD4F6;*/
+}
+
+.dijitDialogTitleBar {
+	vertical-align: top;
+	margin: 0px;
+	padding-left: 1px;
+	padding-top: 1px;
+	z-index: 12;
+	background-image: url(images/hd-2.jpg);
+	cursor: move;
+	overflow: hidden;
+	border: 0px solid;
+	border-color: #1e3b72;
+	vertical-align: middle;
+	height: 23px;
+}
+
+.dijitDialogTitle {
+	margin-left: 6px;
+	margin-top: 2px;
+	font-size: 12px;
+	color: white;
+	font-family: "宋体", "Verdana", "Arial", "Helvetica", "sans-serif";
+	vertical-align: middle;
+	position: absolute;
+	top: 3px;
+}
+
+.dijitDialogPaneContent {
+	position: relative;
+	z-index: 10;
+	border: 0px solid;
+	border-color: #6593CF;
+	margin: 0px;
+	background-color: #f2f9ff; /*#BBD4F6;*/
+	padding: 6px;
+	font-family: Verdana, Helvetica, Garamond, sans-serif;
+	font-size: 12px;
+	overflow: auto;
+}
+
+.dijitDialogUnderlayWrapper {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 998;
+	display: none;
+	background: transparent;
+}
+
+.dijitDialogUnderlay {
+	background: #eeeeee;
+	opacity: 0.5;
+}
+
+.dj_ie .dijitDialogUnderlay {
+	filter: alpha(opacity = 50);
+}
+
+.dijitDialog .closeText {
+	display: none;
+	position: absolute;
+	float: right;
+}
+
+.dojoxResizeHandle {
+	background: url('images/se-handle.gif') no-repeat bottom right;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 16px;
+	height: 16px;
+	cursor: nw-resize;
+}

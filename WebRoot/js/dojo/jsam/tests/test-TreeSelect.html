@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="../../dojo/dojo.js" djConfig="isDebug:true, parseOnLoad: true" ></script>
+<LINK href="../resources/tree.css" type='text/css' rel='stylesheet'>
+<LINK href="../resources/treeList.css" type='text/css' rel='stylesheet'>
+<LINK href="../../../../styles/style.css" type='text/css' rel='stylesheet'>
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+		dojo.require("jsam.Tree");
+		dojo.require("dojo.parser");
+
+dojo.addOnLoad(function() {
+    var treeInput = dijit.byId('multiTree');
+    var deptIds = new Array();
+	treeInput.doSelected = function(vs) {
+	   for(i = 0; i < vs.length; i++) {
+	      console.log(vs[i].text);
+	   }
+	}
+});
+
+</script>
+<div align="center" style="width:76%">
+<form action="#">
+    <table>
+	    <tr>
+		    <td style="text-align:left">
+		    <input>
+		    </td>
+	    </tr>
+	    <tr>
+		    <td style="text-align:left">
+		    <div><input id="xx" value="xx">
+		    <input id="textInp"><input id="valueInp" type="hidden"></div>
+		    <div dojoType="jsam.TreeInput" textNodeId="textInp" id="valueInp" 
+		    text="KOO" class="samTreeList" style="margin-top:-2px">
+			     <div text="cccc"></div>
+				 <div text="xxx"></div>
+				 <div text="xxx"></div>
+				 <div text="xxx">
+				    <div text="yyy"></div>
+					<div text="yyy"></div>
+				</div>
+			</div>
+		    </td>
+	    </tr>
+	    <tr>
+		    <td style="text-align:left">
+		    <textarea rows="10" cols="20"></textarea>
+		    </td>
+	    </tr>
+	    <tr>
+	        <td align="center">
+	        <input id="deptName">
+	        <div dojoType="jsam.TreeInput" textNodeId="deptName"  valueNodeId="deptId" 
+	        id="multiTree" multiple="true" 
+	        useDefaultEvents="false"
+		    text="KOO" 
+		    class="samTreeList" 
+		    style="margin-top:-2px" 
+		    oKText="确定"
+		    cancelText="取消">
+			     <div text="cccc" id='1'></div>
+				 <div text="uuu" id='2'>
+				     <div text="zzz" id='21'></div>
+					  <div text="zzz" id='22'>
+					     <div text="ttt" id='221'></div>
+					     <div text="123" id='222'></div>
+					  </div>
+				 </div>
+				 <div text="xxx" id='3'></div>
+				 <div text="lll" id='4'>
+				    <div text="yyy" id='41'></div>
+					<div text="uiop" id='42'></div>
+				</div>
+			</div>
+				
+	        </td>
+	    </tr>
+    </table>
+</form>
+</div>
+
+   <input id="deptId">   
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+body {
+ SCROLLBAR-ARROW-COLOR: #99bbe8;
+ SCROLLBAR-BASE-COLOR: #dfe8f6;
+ margin:0px;
+}
+body,td,th {
+	font-size: 12px;
+}
+
+img {
+	border:none;
+}
+
+input[type="checkbox"] {
+	border:0px!important;
+}
+
+fieldset {
+    border:1px solid #B5B8C8;
+    padding:10px;
+    margin-bottom:10px;
+}
+fieldset legend {
+    font:normal 12px sans-serif;
+    color:#15428b;
+}
+
+.button {
+	height: 20px;
+	background-color: #D2E0F1;
+	border: 1px solid #99BBE8;
+	background:url(../images/button.gif) repeat-x;
+}
+
+.tree-select {
+	cursor:default;
+	background:#ffffff url(../images/exticons/drop-between.gif) no-repeat right;
+}
+
+.dialog-select {
+	background:#ffffff url(../images/exticons/icon-grid.gif) no-repeat right;
+}
+.clear-left-text{
+    border-right-color:#FFFFFF;
+	padding-right:0px;
+}
+.clear-right-text {
+    width:17px;
+	border-left-color:#FFFFFF;
+	padding-right:0px;
+	margin-left: -7px;
+	background:#ffffff url(../images/grid/clear.png) no-repeat right;
+}
+
+input {
+	border: 1px solid #CBCBCB;
+}
+
+textarea {
+	border: 1px solid #CBCBCB;
+}
+
+input[type="checkbox"] {
+	border: 0;
+}
+
+select {
+	padding: 1px;
+	font-size: 12px;
+	margin: 2px;
+}
+textarea {
+	padding: 1px;
+	font-size: 12px;
+	margin:2px;	
+}
+a:link {
+	color: #000000;
+    text-decoration:none;
+}
+a:visited {
+	color: #000000;
+    text-decoration:none;
+}
+a:hover{
+    color:#FF6600;
+	text-decoration:none;
+	}
+a:actvie{
+    color:#FF6600;
+	text-decoration:none;
+	}
+.color-red{
+	color:red;
+}
+.color-green{
+	color:green;
+}
+.color-blue{
+	color:blue;
+}
+.FileText {
+	font-family: "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+	color: #333333;
+	text-decoration: none;
+	border: 1px solid #999999;
+	width: 60%;
+}
+
+.editor {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#mytable {
+	width: 50%;
+	padding: 0;
+	margin: 0;
+	border-left: 1px solid #C1DAD7;
+}
+
+#mytable tr{
+	background: #FFFFFF;
+	event:expression(onmouseover = function(){this.style.backgroundColor='#E3FFC9'},onmouseout = function(){this.style.backgroundColor='#FFFFFF'});
+}
+
+#mytable th {
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 0px 0px 0px 0px;
+	background: #99ccff;
+	height: 24px;
+	font-size: 15px;
+}
+
+#mytable td {
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	padding: 0px 6px 0px 6px;
+	height: 24px;
+	font-size: 12px;
+}

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+
+	<!-- 属性文件读入 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:config/dao.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 支持 @Transactional 标记 -->
+	<tx:annotation-driven />
+
+	<!-- 支持 @AspectJ 标记-->
+	<aop:aspectj-autoproxy />
+
+	<!-- 以AspectJ方式 定义 AOP -->
+	<aop:config proxy-target-class="true">
+		<!-- 
+		<aop:pointcut id="pointcutManager" expression="execution(* com.alphasta..service..*Manager.save*(..)) || 
+		execution(* com.alphasta..service..*Manager.remove*(..)) ||
+		execution(* com.alphasta..service..*Manager.update*(..))"/>
+		 -->
+		<aop:advisor
+			pointcut="execution(* com.alphasta..service..*Manager.*(..))"
+			advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* com.alphasta..dao..*Dao.*(..))"
+			advice-ref="txAdvice" />
+		<!--  		
+		<aop:aspect id="logAspect" ref="logAdvice">
+			<aop:after pointcut-ref="pointcutManager" method="writeLog"/>
+		</aop:aspect>
+		-->
+	</aop:config>
+	
+	<!-- 基本事务定义,使用transactionManager作事务管理,默认get*方法的事务为readonly,其余方法按默认设置.
+		默认的设置请参考Spring文档事务一章. -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="pageQuery*" read-only="true" />
+			<tx:method name="set*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- ============================= -->
+	<!-- DataSource，使用C3P0           -->
+	<!-- ============================= -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="user">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${pool.initialPoolSize}</value>
+		</property>
+		<property name="minPoolSize">
+		<value>${pool.minPoolSize}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${pool.maxPoolSize}</value>
+		</property>
+		<property name="idleConnectionTestPeriod">
+			<value>${pool.testPeriod}</value>
+		</property>
+		<property name="automaticTestTable">
+			<value>${pool.testTable}</value>
+		</property>
+	</bean>
+	<!-- ============================================= -->
+	<!-- jdbcTemplate 是很好用的JDBC工具                    -->
+	<!-- ============================================= -->
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- ======================================== -->
+	<!-- Spring 对Oracle数据库操作clob类型大字段的处理 -->
+	<!-- ======================================== -->
+	<bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor" />
+
+	<bean id="oracleLobHandle"
+		class="org.springframework.jdbc.support.lob.OracleLobHandler">
+		<property name="nativeJdbcExtractor">
+			<ref local="nativeJdbcExtractor" />
+		</property>
+	</bean>
+	
+	<!-- ============================= -->
+	<!--Hibernate SessionFatory        -->
+	<!-- ============================= -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.alphasta.common.dept.model.Dept</value>
+				<value>com.alphasta.common.security.user.model.User</value>
+				<value>com.alphasta.common.security.user.model.Role</value>
+				<value>com.alphasta.common.security.user.model.Permission</value>
+				<value>com.alphasta.common.security.user.model.Resource</value>
+				<value>com.alphasta.cms.model.Employees</value>
+				<value>com.alphasta.cms.model.StuInfo</value>
+				<value>com.alphasta.cms.model.WorkPlan</value>
+			</list>
+		</property>
+		<property name="lobHandler" ref="oracleLobHandle"/>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					${hibernate.dialect}
+				</prop>
+				<prop key="hibernate.show_sql">
+					${hibernate.show_sql}
+				</prop>
+				<prop key="hibernate.cache.use_query_cache">
+					${hibernate.cache.use_query_cache}
+				</prop>
+				<prop key="hibernate.cache.provider_class">
+					${hibernate.cache.provider_class}
+				</prop>
+				<prop key="hibernate.jdbc.batch_size">0</prop>
+			</props>
+		</property>
+		<!-- oracle　clob 支持
+		<property name="lobHandler"><ref bean="oracleLobHandle"/></property>
+		 -->
+	</bean>
+	<!-- ============================= -->
+	<!--Hibernate TransactionManager   -->
+	<!-- ============================= -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- ============================= -->
+	<!-- Hibernate Tempate             -->
+	<!-- ============================= -->
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- ========================================================== -->
+	<!-- ======通用的BaseHibernateDAO，多数Manager可以直接引用这个bean== -->
+	<!-- ========================================================== -->
+	<bean id="dao"
+		class="com.alphasta.common.core.dao.hibernate.BaseHibernateDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- ========================================================== -->
+	<!-- ==========BaseManager,一些简单的Action可以直接引用这个bean===== -->
+	<!-- ========================================================== -->
+	<bean id="manager"
+		class="com.alphasta.common.core.service.BaseManager">
+		<property name="dao" ref="dao" />
+	</bean>
+	
+	<!-- ================================= -->
+	<!-- Cache FactoryBean                 -->
+	<!-- ================================= -->
+	<bean id="cache"
+		class="com.alphasta.common.core.cache.OsCacheFactoryBean">
+		<property name="regionName">
+			<value>com.alphasta.common.cache.DefaultRegion</value>
+		</property>
+	</bean>
+	
+</beans>

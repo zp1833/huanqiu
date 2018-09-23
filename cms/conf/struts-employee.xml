@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<!-- 员工管理 -->
+  <package name="employee" extends="struts-default" namespace="/admin/employee">
+    <action name="listEmployees" class="employeeAction" method="pageQuery">
+      <result name="success" type="dispatcher">/pages/admin/employee/listEmployee.jsp</result>
+    </action>
+    <action name="newEmployee" class="employeeAction">
+      <result>/pages/admin/employee/editEmployee.jsp</result>
+    </action> 
+    <action name="editEmployee" class="employeeAction" method="edit">
+      <result>/pages/admin/employee/editEmployee.jsp</result>
+    </action>
+    <action name="saveEmployee" class="employeeAction" method="save">       
+      <result name="success" type="redirect"><![CDATA[listEmployees.do?model.id=${model.id}&currentPageNo=${currentPageNo}]]></result>
+      <result name="input">/pages/admin/employee/editEmployee.jsp</result>
+      <interceptor-ref name="fileUpload">  
+        <param name="allowedTypes">image/x-png,image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,application/octet-stream</param> 
+        <param name="maximumSize ">1024000</param>  
+      </interceptor-ref>
+      <interceptor-ref name="params" />
+	  <interceptor-ref name="model-driven" />
+	  <interceptor-ref name="validationWorkflowStack" />
+    </action>
+    <action name="checkLoginId" class="employeeAction" method="checkLoginId">
+      <result>/pages/admin/employee/editEmployee.jsp</result>
+      <result name="input">/pages/admin/employee/editEmployee.jsp</result>
+    </action>
+     <!-- 排序列表 -->
+	<action name="listOrderEmployee" class="employeeAction">
+      <result>/pages/admin/employee/sortLeadership.jsp</result>
+    </action>
+    <!-- 保存排序结果 -->
+    <action name="saveOrder" class="employeeAction" method="saveOrder">
+      	<result name="success" type="redirect">listOrderEmployee.do</result>
+    </action>
+    <!-- 删除用户 -->
+    <action name="removeEmployees" class="employeeAction" method="remove">
+		<result name="success" type="redirect">listEmployees.do</result>
+	</action>
+  </package>
+</struts>

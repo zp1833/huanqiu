@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="admin.security.user" extends="struts-default" namespace="/admin/security/user">
+		<action name="listUsers" class="userAction"	method="pageQuery">
+			<result>/pages/admin/security/user/listUsers.jsp</result>
+		</action>
+		<action name="newUser" class="userAction">
+			<result>/pages/admin/security/user/editUser.jsp</result>
+		</action>
+		<action name="editUser" class="userAction" method="edit">
+			<result>/pages/admin/security/user/editUser.jsp</result>
+		</action>
+		<action name="removeUsers" class="userAction" method="remove">
+			<result name="success" type="redirect">listUsers.do</result>
+		</action>
+		<action name="newChange" class="userAction">
+		    <result>/pages/admin/security/user/changePassword.jsp</result>
+		    <result name="input" type="dispatcher">/pages/admin/security/user/changePassword.jsp</result>
+		</action>
+		<action name="changePassword" class="userAction" method="changePassword">
+			<result name="success" type="redirect">/pages/welcome.jsp</result>
+			<result name="input" type="dispatcher">/pages/admin/security/user/changePassword.jsp</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="model-driven" />
+			<interceptor-ref name="validationWorkflowStack" />
+		</action>
+		
+		<action name="saveUser" class="userAction" method="save">
+		   <interceptor-ref name="fileUpload">  
+               <param name="allowedTypes">image/png,image/gif,image/jpeg,image/jpg</param> 
+               <param name="maximumSize ">102400</param>  
+           </interceptor-ref>  
+		
+			<result name="success" type="redirect">listUsers.do</result>
+			<result name="input" type="dispatcher">/pages/admin/security/user/editUser.jsp</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="model-driven" />
+			<interceptor-ref name="validationWorkflowStack" />
+		</action>
+	</package>
+	<package name="admin.security.role" extends="struts-default" namespace="/admin/security/role">
+		<action name="listRoles" class="roleAction"	method="query">
+			<result>/pages/admin/security/role/listRoles.jsp</result>
+		</action>		
+		<action name="newRole" class="roleAction">
+			<result>/pages/admin/security/role/editRole.jsp</result>
+		</action>
+		<action name="editRole" class="roleAction" method="edit">
+			<result>/pages/admin/security/role/editRole.jsp</result>
+		</action>
+		<action name="saveRole" class="roleAction" method="save">
+			<result name="success" type="redirect">listRoles.do</result>
+			<result name="input" type="dispatcher">/pages/admin/security/role/editRole.jsp</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="model-driven" />
+			<interceptor-ref name="validationWorkflowStack" />
+		</action>
+		<action name="removeRoles" class="roleAction" method="remove">
+			<result name="success" type="redirect">listRoles.do</result>
+		</action>
+	</package>
+	<package name="admin.security.permission" extends="struts-default" namespace="/admin/security/permission">
+		<action name="listPermissions" class="permissionAction"	method="query">
+			<result>/pages/admin/security/permission/listPermissions.jsp</result>
+		</action>		
+		<action name="newPermission" class="permissionAction">
+			<result>/pages/admin/security/permission/editPermission.jsp</result>
+		</action>
+		<action name="editPermission" class="permissionAction" method="edit">
+			<result>/pages/admin/security/permission/editPermission.jsp</result>
+		</action>
+		<action name="savePermission" class="permissionAction" method="save">
+			<result name="success" type="redirect">listPermissions.do</result>
+			<result name="input" type="dispatcher">/pages/admin/security/permission/editPermission.jsp</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="model-driven" />
+			<interceptor-ref name="validationWorkflowStack" />
+		</action>
+		<action name="removePermissions" class="permissionAction" method="remove">
+			<result name="success" type="redirect">listPermissions.do</result>
+		</action>
+	</package>
+	<package name="admin.security.resource" extends="struts-default" namespace="/admin/security/resource">
+		<action name="listResources" class="resourceAction"	method="query">
+			<result>/pages/admin/security/resource/listResources.jsp</result>
+		</action>		
+		<action name="newResource" class="resourceAction">
+			<result>/pages/admin/security/resource/editResource.jsp</result>
+		</action>
+		<action name="editResource" class="resourceAction" method="edit">
+			<result>/pages/admin/security/resource/editResource.jsp</result>
+		</action>
+		<action name="saveResource" class="resourceAction" method="save">
+			<result name="success" type="redirect">listResources.do</result>
+			<result name="input" type="dispatcher">/pages/admin/security/resource/editResource.jsp</result>
+			<interceptor-ref name="params" />
+			<interceptor-ref name="model-driven" />
+			<interceptor-ref name="validationWorkflowStack" />
+		</action>
+		<action name="removeResources" class="resourceAction" method="remove">
+			<result name="success" type="redirect">listResources.do</result>
+		</action>
+	</package>
+</struts>
+

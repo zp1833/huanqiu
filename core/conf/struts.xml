@@ -1,0 +1,12 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<constant name="struts.custom.i18n.resources" value="application"></constant>
+	<include file="struts-security.xml"></include>
+	<include file="struts-dept.xml"></include>
+	<include file="struts-employee.xml"></include>
+	<include file="struts-stuinfo.xml"></include>
+	<include file="struts-workplan.xml"></include>
+</struts>

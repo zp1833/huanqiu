@@ -1,0 +1,49 @@
+package com.alphasta.common.security.acegi.taglibs;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyTagSupport;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.alphasta.common.security.user.UserUtil;
+import com.alphasta.common.security.user.model.User;
+
+/**
+ * 用于在页面上显示用户名
+ * 
+ * @author Sam Lee
+ * 
+ */
+@SuppressWarnings("serial")
+public class DisplayUsernameTag extends BodyTagSupport {
+	/**
+	 * log
+	 */
+	private static Log log = LogFactory.getLog(DisplayUsernameTag.class);
+
+	/**
+	 * @see BodyTagSupport#doEndTag()
+	 */
+	@Override
+	public int doEndTag() throws JspException {
+		HttpServletRequest request = (HttpServletRequest) pageContext
+				.getRequest();
+		User user = UserUtil.getPrincipal(request);
+		log.debug("display-" + user);
+		if (user != null) {
+			try {
+				pageContext.getOut().print(
+						(user.getUsername() != null) ? user.getUsername()
+								: user.getLoginId());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return EVAL_PAGE;
+	}
+
+}

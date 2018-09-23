@@ -1,0 +1,65 @@
+
+html, body {
+	background:#3d71b8 url(../images/desk.jpg) no-repeat left top;
+    font: normal 12px tahoma, arial, verdana, sans-serif;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	overflow: hidden;
+	height: 100%;
+}
+
+
+#x-desktop {
+	width: 100%;
+	height: 100%;
+	border: 0 none;
+	position: relative;
+    overflow:hidden;
+    zoom:1;
+}
+
+
+/* Desktop Shortcuts */
+#x-shortcuts dt {
+    float:left;
+    margin:15px 0 0 15px;
+    clear:left;
+    width:64px;
+    font:normal 10px tahoma,arial,verdana,sans-serif;
+    text-align:center;
+    zoom:1;
+    display:block;
+}
+#x-shortcuts dt a {
+    width:64px;
+    display:block;
+    color:white;
+    text-decoration:none;
+}
+#x-shortcuts dt div {
+    width:100%;
+    color:white;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    cursor:pointer;
+}
+.ext-ie #x-shortcuts dt img {
+    background:transparent !important;
+}
+#x-shortcuts dt a:hover {
+    text-decoration:underline;
+}
+/* shortcuts */
+#grid-win-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/grid48x48.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/grid48x48.png', sizingMethod='scale');
+}
+#acc-win-shortcut img {
+    width:48px;
+    height:48px;
+    background-image: url(../images/im48x48.png);
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/im48x48.png', sizingMethod='scale');
+}

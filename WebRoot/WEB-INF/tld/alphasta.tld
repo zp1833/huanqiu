@@ -1,0 +1,38 @@
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+  http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+
+	<tlib-version>1.0</tlib-version>
+	<short-name>cms</short-name>
+	<uri>alphasta/cms</uri>
+	<tag>
+		<name>remindTag</name>
+		<tag-class>com.alphasta.cms.stuinfo.webapp.taglibs.RemindTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>isDeptAdmin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>workPlanTag</name>
+		<tag-class>com.alphasta.cms.workplan.webapp.taglibs.WorkPlanTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
+		<name>showDept</name>
+		<tag-class>com.alphasta.common.dept.webapp.taglib.ShowDeptTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>deptId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+</taglib>

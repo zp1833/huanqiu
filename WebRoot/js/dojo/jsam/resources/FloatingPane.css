@@ -1,0 +1,124 @@
+.dojoxFloatingCloseIcon,
+.dojoxFloatingMiniMizeIcon {
+  vertical-align: middle;
+	height: 16px;
+	width: 16px;
+	float: right;
+	cursor:default;
+	margin: 3px;
+}
+
+.dojoxFloatingCloseIcon {
+	background:url('images/close.gif') no-repeat center center; 
+	
+}
+.dojoxFloatingMiniMizeIcon {
+	background:url('images/collapse.gif') no-repeat center center; 
+	
+}
+
+.dijitContentPane {
+	position: absolute;
+	overflow: visible;
+	z-index: 10;
+	border: 1px solid;
+	border-color: #6593CF;
+	background-color: #BBD4F6;
+}
+.dijitTitlePaneTitle{
+  vertical-align: top;
+	margin: 0px;
+	padding:0px;
+	z-index: 12;
+	background-image: url(images/hd-2.jpg);
+	cursor: move;
+	overflow: hidden;
+	border: 0px solid;
+	border-color: #1e3b72;
+	vertical-align: middle;
+	height:23px;
+	color: white;
+}
+
+.dojoxFloatingPaneContent {
+	position: relative;
+	z-index: 10;
+	border: 0px solid;
+	border-color: #6593CF;
+	margin: 0px;
+	background-color: #BBD4F6;
+	padding: 6px;
+	font-family: Verdana, Helvetica, Garamond, sans-serif;
+	font-size: 12px;
+	overflow: auto;
+}
+
+
+.dojoxFloatingResizeHandle {
+	background:url('images/se-handle.gif') no-repeat bottom right;
+	position:absolute; 
+	right:0; 
+	bottom:0; 
+	width:16px;
+	height:16px; 
+	cursor:nw-resize;
+}
+
+.dojoxDockTitleNode {
+	vertical-align: top;
+	margin: 0px;
+	padding:0px;
+	z-index: 12;
+	background-image: url(images/hd-2.jpg);
+	cursor: move;
+	overflow: hidden;
+	border: 0px solid;
+	border-color: #1e3b72;
+	vertical-align: middle;
+	height:23px;
+}
+
+.dojoxFloatingDockDefault {
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	overflow:hidden; 
+	margin:0;
+	margin-bottom:3px; 
+	padding:0px; 
+	width:100%;
+	z-index:900;
+
+	background:transparent;
+	
+}
+
+.dojoxDockList { 
+	display:inline; 
+	list-style-type:none; 
+	margin:0; 
+	margin-bottom:3px; 
+	padding:3px; 
+} 
+
+.dojoxDockRestoreButton {
+	background:url('images/expand.gif') no-repeat center center;
+	width:16px; height:16px;
+	overflow:hidden; 
+	float:right;
+	margin-top:2px; 
+	
+}
+
+
+.dojoxDockNode {
+	cursor:pointer; 
+	border:1px solid #ccc;
+	background-color:#ededed;
+	padding:3px; 
+	height:20px; 
+	margin-left:5px; 
+	-moz-border-radius:8pt 8pt;
+	width:120px; 
+	float:left; 
+}

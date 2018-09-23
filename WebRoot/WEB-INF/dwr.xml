@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://www.getahead.ltd.uk/dwr/dwr20.dtd">
+
+<dwr>
+   	<allow>
+   	    <create javascript="UserRoleAction" creator="spring">
+   	         <param name="beanName" value="userRoleRemoteAction" ></param>
+   	    </create> 
+   	    
+   	    <create javascript="RolePermissionAction" creator="spring">
+   	      <param name="beanName" value="rolePermissionRemoteAction"></param>
+   	    </create>
+
+   	    <create javascript="DeptAction" creator="spring">
+   	         <param name="beanName" value="deptAction" ></param>
+   	    </create>
+
+   	    <create javascript="StuInfoAction" creator="spring">
+   	         <param name="beanName" value="stuInfoAction" ></param>
+   	    </create>
+   	    
+   	    <create javascript="StuInfoManager" creator="spring">
+   	         <param name="beanName" value="stuInfoManager" ></param>
+   	    </create>
+
+   	    <create javascript="WorkPlanAction" creator="spring">
+   	         <param name="beanName" value="workPlanAction" ></param>
+   	    </create>
+
+   	    <create javascript="PermissionResourceAction" creator="spring">
+   	         <param name="beanName" value="permissionResourceAction"></param>
+   	    </create>
+   	    
+   	    <create javascript="ResourceAction" creator="spring">
+   	         <param name="beanName" value="resourceAction"></param>
+   	    </create>
+   	    
+   	    <create javascript="EmployeeAction" creator="spring">
+   	         <param name="beanName" value="employeeAction"></param>
+   	    </create>
+   	    
+        <create javascript="GB2Alpha" creator="none">
+   	         <param name="class" value="com.alphasta.common.core.util.GB2Alpha"></param>
+   	    </create>
+   	    
+   	    <convert converter="bean"  match="com.alphasta.common.core.dao.support.Page"  />
+   	    <convert converter="bean"  match="com.alphasta.oa.common.DwrSelectorQueryParams" />
+   	    <convert converter="bean"  match="com.alphasta.common.security.user.model.Role"  />
+   	    <convert converter="bean"  match="com.alphasta.common.security.user.model.User"  />
+   	    <convert converter="bean"  match="com.alphasta.common.security.user.model.Resource" />
+   	    <convert converter="bean"  match="com.alphasta.common.security.user.model.Permission"  />
+   	    <convert converter="bean"  match="com.alphasta.common.dept.model.Dept"  />
+   	    <convert converter="bean"  match="com.alphasta.cms.model.Employees"  />
+   	    <convert converter="map"  match="java.util.Map" />
+	</allow>
+
+
+	<signatures>
+		<![CDATA[
+        import java.util.Map;
+        ]]>
+	</signatures>
+</dwr>

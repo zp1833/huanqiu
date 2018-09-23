@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//OpenSymphony Group//XWork Validator 1.0//EN" 
+  		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+  <field name="name">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[请填写该员工姓名]]></message>
+    </field-validator>
+  </field>
+  <field name="model.dept.name">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[请为该员工选择部门]]></message>
+    </field-validator>
+  </field>
+  <field name="model.birthday">
+    <field-validator type="date">
+      <message><![CDATA[请输入正确的日期格式]]></message>
+    </field-validator>
+  </field>
+  <field name="model.graduateDate">
+    <field-validator type="date">
+      <message><![CDATA[请输入正确的日期格式]]></message>
+    </field-validator>
+  </field>
+  <field name="model.jobDate">
+    <field-validator type="date">
+      <message><![CDATA[请输入正确的日期格式]]></message>
+    </field-validator>
+  </field>
+  <field name="model.user.email">
+    <field-validator type="email">
+      <message><![CDATA[请填写正确的邮箱地址]]></message>
+    </field-validator>
+  </field>
+  <field name="model.msn">
+    <field-validator type="email">
+      <message><![CDATA[请填写正确的MSN地址]]></message>
+    </field-validator>
+  </field>
+  <field name="model.user.loginId">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message><![CDATA[请填写该员工登录名]]></message>
+    </field-validator>
+  </field>
+  <field name="model.user.password">
+    <field-validator type="requiredstring">
+      <param name="trim">true</param>
+      <message>请输入密码</message>
+    </field-validator>
+    <field-validator type="stringlength">
+      <param name="minLength">3</param>
+      <message><![CDATA[最少输入${minLength}位密码]]></message>
+    </field-validator>
+  </field>
+  <field name="model.user.confirmPwd">
+    <field-validator type="fieldexpression">
+	  <param name="expression">(user.confirmPwd == user.password)</param>
+	  <message key="user.password.equal"><![CDATA[两次输入密码不一致]]></message>
+	</field-validator>
+  </field>
+  <field name="model.dept.name">
+    <field-validator type="fieldexpression">
+	  <param name="expression">(dept.name != "石家庄津桥留学公司")</param>
+	  <message><![CDATA[请为用户选择一个具体的部门]]></message>
+	</field-validator>
+  </field>
+</validators>
+
